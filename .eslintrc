@@ -42,7 +42,7 @@
     {
       "files": [
         "**/test/**",
-        "**/extensions/**"
+        "**/helpers/**"
       ],
       "env": {
         "mocha": true
