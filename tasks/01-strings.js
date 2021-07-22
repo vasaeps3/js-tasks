@@ -147,7 +147,7 @@ function neutralise(s1, s2) {
 //  mumbling("maTT") ➞ "M-Aa-Ttt-Tttt"
 //  mumbling("EdaBit") ➞ "E-Dd-Aaa-Bbbb-Iiiii-Tttttt"
 function mumbling(str) {
-
+  throw new Error('Not implemented');
 }
 
 module.exports = {

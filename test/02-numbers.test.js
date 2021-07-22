@@ -56,13 +56,13 @@ describe('02-numbers.test', () => {
   });
 
   it('tempConversion', () => {
-    assert.equal(tempConversion(0), [32, 273.15]);
-    assert.equal(tempConversion(100), [212, 373.15]);
-    assert.equal(tempConversion(42.8), [109.04, 315.95]);
-    assert.equal(tempConversion(300.4), [572.72, 573.55]);
-    assert.equal(tempConversion(-10.7), [12.74, 262.45]);
-    assert.equal(tempConversion(-273.13), [-459.63, 0.02]);
-    assert.equal(tempConversion(-273.16), 'Invalid', 'Wow, is it realy that cold?');
+    assert.deepEqual(tempConversion(0), [32, 273.15]);
+    assert.deepEqual(tempConversion(100), [212, 373.15]);
+    assert.deepEqual(tempConversion(42.8), [109.04, 315.95]);
+    assert.deepEqual(tempConversion(300.4), [572.72, 573.55]);
+    assert.deepEqual(tempConversion(-10.7), [12.74, 262.45]);
+    assert.deepEqual(tempConversion(-273.13), [-459.63, 0.02]);
+    assert.deepEqual(tempConversion(-273.16), 'Invalid', 'Wow, is it realy that cold?');
   });
 
   it('doubleFactorial', () => {
