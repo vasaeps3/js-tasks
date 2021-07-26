@@ -8,7 +8,11 @@
 // Notes
 // Remember to sort the keys.
 function keysAndValues(obj) {
-  throw new Error('Not implemented');
+  const newObj = Object.keys(obj).sort().reduce((object, key) => {
+    object[key] = obj[key];
+    return object;
+  }, {});
+  return [Object.keys(newObj), Object.values(newObj)];
 }
 
 // Create a function that moves all capital letters to the front of a word.
@@ -21,7 +25,16 @@ function keysAndValues(obj) {
 // Notes
 // Keep the original relative order of the upper and lower case letters the same.
 function capToFront(s) {
-  throw new Error('Not implemented');
+  const bigLetters = [];
+  const smallLetters = [];
+  s.split('').forEach(char => {
+    if (char.toUpperCase() === char) {
+      bigLetters.push(char);
+    } else {
+      smallLetters.push(char);
+    }
+  });
+  return bigLetters.concat(smallLetters).join('');
 }
 
 // Create a function that takes a string and returns the middle character(s). If the word's length is odd, return the middle character. If the word's length is even, return the middle two characters.
@@ -35,7 +48,8 @@ function capToFront(s) {
 // Notes
 //  All test cases contain a single word (as a string).
 function getMiddle(str) {
-  throw new Error('Not implemented');
+  const middle = str.length / 2;
+  return str.length % 2 !== 0 ? str[Math.floor(middle)] : str[middle - 1] + str[middle];
 }
 
 // Create a function that takes a number and returns an array with the digits of the number in reverse order.
@@ -45,7 +59,7 @@ function getMiddle(str) {
 //  reverseArr(623478) ➞ [8, 7, 4, 3, 2, 6]
 //  reverseArr(12345) ➞ [5, 4, 3, 2, 1]
 function reverseArr(num) {
-  throw new Error('Not implemented');
+  return ('' + num).split('').reverse().map(item => +item);
 }
 
 // Create a function that takes a number as an argument and returns a string formatted to separate thousands.
@@ -58,7 +72,13 @@ function reverseArr(num) {
 // Notes
 //  You can expect a valid number for all test cases.
 function formatNum(num) {
-  throw new Error('Not implemented');
+  const arrStr = ('' + num).split('');
+  let i = -3;
+  while (arrStr.length + i > 0) {
+    arrStr.splice(i, 0, ',');
+    i -= 4;
+  }
+  return arrStr.join('');
 }
 
 // Write a function that takes a string of one or more words as an argument and returns the same string, but with all five or more letter words reversed. Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
@@ -71,7 +91,12 @@ function formatNum(num) {
 // Notes
 // You can expect a valid string to be provided for each test case.
 function reverse(str) {
-  throw new Error('Not implemented');
+  if (str.includes(' ')) {
+    const mappedArrStr = str.split(' ').map(item => (item.length >= 5) ? item.split('').reverse().join('') : item);
+    return mappedArrStr.join(' ');
+  } else {
+    return str.split('').reverse().join('');
+  }
 }
 
 // Usually when you sign up for an account to buy something, your credit card number, phone number or answer to a secret question is partially obscured in some way. Since someone could look over your shoulder, you don't want that shown on your screen. Hence, the website masks these strings.
@@ -87,7 +112,14 @@ function reverse(str) {
 //  The maskify function must accept a string of any length.
 //  An empty string should return an empty string (fourth example above).
 function maskify(str) {
-  throw new Error('Not implemented');
+  if (str === '') {
+    return '';
+  } else {
+    for (let i = 0; i < str.length - 4; i++) {
+      str = str.replace(str[i], '#');
+    }
+    return str;
+  }
 }
 
 // Write a function that, given a date (in the format MM/DD/YYYY), returns the day of the week as a string. Each day name must be one of the following strings: "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", or "Saturday".
@@ -99,7 +131,9 @@ function maskify(str) {
 // Notes
 //  This challenge assumes the week starts on Sunday.
 function getDay(day) {
-  throw new Error('Not implemented');
+  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  let date = new Date(day).getDay();
+  return days[date];
 }
 
 // Given a fraction frac (given in the format "1/2" for example) and n number of decimal places, return a sentence in the following format:
@@ -115,7 +149,9 @@ function getDay(day) {
 //  Numbers greater than one may be given as top-heavy fractions (no mixed numbers).
 //  n won't be 1 because that would cause "decimal places" to be "decimal place", making the challenge more cumbersome than it needs to be.
 function fracRound(frac, n) {
-  throw new Error('Not implemented');
+  const arr = frac.split('/');
+  const result = (arr[0] / arr[1]).toFixed(n);
+  return `${frac} rounded to ${n} decimal places is ${result}`;
 }
 
 // Create a function that accepts a string and returns true if it's in the format of a proper phone number and false if it's not. Assume any number between 0-9 (in the appropriate spots) will produce a valid phone number.
@@ -130,8 +166,30 @@ function fracRound(frac, n) {
 // Notes
 // Don't forget the space after the closing parentheses.
 function isValidPhoneNumber(str) {
-  throw new Error('Not implemented');
+  let validPhoneExample = '(000) 000-0000';
+  let bool;
+  if (validPhoneExample.length === str.length) {
+    for (let i = 0; i < str.length; i++) {
+      if (isNaN(parseInt(str[i])) === isNaN(parseInt(validPhoneExample[i]))) {
+        if (isNaN(parseInt(str[i])) &&
+        str[i] === validPhoneExample[i]) {
+          bool = true;         
+        }
+      } 
+    }
+  } else {
+    bool = false;
+  }
+  return bool;
 }
+
+console.log(isValidPhoneNumber('(123) 456-7890'));
+console.log(isValidPhoneNumber('(123)456-7890'));
+console.log(isValidPhoneNumber('(519) 505-6498'));
+console.log(isValidPhoneNumber('abc(123) 456-7890abc'));
+console.log(isValidPhoneNumber('(123)456-7890abc'));
+console.log(isValidPhoneNumber('(123)_456-7890'));
+console.log(isValidPhoneNumber('(098) 123 4567'));
 
 module.exports = {
   keysAndValues,
