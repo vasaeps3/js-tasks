@@ -17,6 +17,8 @@ function removeLeadingTrailing(n) {
   return answer;
 }
 
+// removeLeadingTrailing(12);
+
 // Create a function that will remove the letters "a", "b" and "c" from the given string and return the modified version. If the given string does not contain "a", "b", or "c", return null.
 //
 // Examples
@@ -28,7 +30,7 @@ function removeLeadingTrailing(n) {
 //  If the given string does not contain "a", "b", or "c", return null.
 function removeABC(str) {
   const res = str.split(/a|b|c/g).join("")
-  return str.length == res.length? null : res; 
+  return str.length === res.length ? null : res; 
 }
 
 // Given a string of numbers separated by a comma and space, return the product of the numbers.
@@ -42,7 +44,7 @@ function removeABC(str) {
 // Notes
 //  Bonus: Try to complete this challenge in one line!
 function multiplyNums(nums) {
-  return nums.split(',').reduce((a,b) => a*b)  
+  return nums.split(',').reduce((a,b) => a*b , )  
 }
 // Create a function to determine if the sum of all the individual even digits are greater than the sum of all the indiviudal odd digits in a string of numbers.
 //   If the sum of odd numbers is greater than the sum of even numbers, return "Odd is greater than Even".
@@ -59,32 +61,33 @@ function multiplyNums(nums) {
 function evenOrOdd(str) {
   let even = [];
   let odd = [];
-  let arr1 = str.split('');
-  for (let i=0; i < arr1.length; i++) {
-    if ((arr1[i] % 2) === 0)
-  {
-    even.push(arr1[i])
-  	console.log(arr1[i]);
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] % 2 === 0) {
+      even.push(str[i]);
+    } else {
+      odd.push(str[i]);
+    }
+  }
+
+  let sum1 = 0;
+  let sum2 = 0;
+
+  for (let i = 0; i < even.length; i++) {
+    sum1 += Number(even[i]);
+  }
+
+  for (let i = 0; i < odd.length; i++) {
+    sum2 += Number(odd[i]);
+  }
+
+  if (sum1 > sum2) {
+    return "Even is greater than Odd";
+  } else if (sum1 < sum2) {
+    return "Odd is greater than Even";
+  } else if (sum1 === sum2) {
+    return "Even and Odd are the same";
   }
 }
-let arr2 = str.split('');
-for (let i=0; i < arr2.length; i++) {
-  if (arr2[i] % 2)
-{
-  odd.push(arr2[i])
-  console.log(arr2[i]);
-}
-}
-if (even.length > odd.length) {
- console.log('Even is greater than Odd')
-} else if (even.length < odd.length) {
-  console.log('Odd is greater than Even')
-} else if (even.length == odd.length) {
-  console.log("Even and Odd are the same");
-}
-}
-
-
 // Write a function that takes an integer i and returns an integer with the integer backwards followed by the original integer.
 //
 //  To illustrate:
@@ -99,7 +102,9 @@ if (even.length > odd.length) {
 // Notes
 // i is a non-negative integer.
 function reverseAndNot(i) {
-  return i.split('').reverse().join('') + i;
+  const str = '' + i;
+  return str.split('').reverse().join('') + str;
+  
 }
 
 
@@ -130,7 +135,7 @@ function XO(str) {
     if (arr1[i].includes("x"))
   {
     x.push(arr1[i])
-  	console.log(arr1[i]);
+  	
   }
 }
 let arr2 = str.split('');
@@ -138,7 +143,7 @@ for (let i=0; i < arr2.length; i++) {
   if (arr2[i].includes("o"))
 {
   o.push(arr2[i])
-  console.log(arr2[i]);
+ 
 }
 }
 if (x.length == o.length) {
@@ -163,9 +168,9 @@ if (x.length > o.length || x.length < o.length) {
 //  Some words may contain more than one uppercase letter (see example #4).
 function makeTitle(str) {
   const arr = str.split(/\s+/)
-  .map(word => word[0]
-  .toUpperCase() + word.substring(1))
-  .join(' ')
+    .map(word => word[0]
+    .toUpperCase() + word.substring(1))
+    .join(' ')
   return arr;
 }
 
@@ -181,14 +186,12 @@ function makeTitle(str) {
 
 
 function doubleLetters(word) {
-  for(var i = 0; i <= word.length; i++) {
-      for(var j = i+1; j <= word.length; j++) {
-          if(word[j] == word[i]) {
-              return true;
-          }
-      }
-  }
-  return false;
+  for(let i = 0; i <= word.length; i++) {
+    if(word[i] === word[i-1]) {
+      return true;
+          } 
+}
+return false;
 }
 
 
