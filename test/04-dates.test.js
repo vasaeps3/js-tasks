@@ -62,21 +62,21 @@ describe('04-dates.test', () => {
   });
 
   it('convertDate', () => {
-    assert.equal(convertDate('January 9, 2019'), [1, 9, 2019]);
-    assert.equal(convertDate('Jan 9, 2019'), [1, 9, 2019]);
-    assert.equal(convertDate('01/09/2019'), [1, 9, 2019]);
-    assert.equal(convertDate('01-09-2019'), [1, 9, 2019]);
-    assert.equal(convertDate('01.09.2019'), [1, 9, 2019]);
-    assert.equal(convertDate('March 3, 1901'), [3, 3, 1901]);
-    assert.equal(convertDate('Mar 3, 1901'), [3, 3, 1901]);
-    assert.equal(convertDate('03/03/1901'), [3, 3, 1901]);
-    assert.equal(convertDate('03-03-1901'), [3, 3, 1901]);
-    assert.equal(convertDate('03.03.1901'), [3, 3, 1901]);
-    assert.equal(convertDate('August 8, 1666'), [8, 8, 1666]);
-    assert.equal(convertDate('Nov 13, 1533'), [11, 13, 1533]);
-    assert.equal(convertDate('04/15/1789'), [4, 15, 1789]);
-    assert.equal(convertDate('12-23-1111'), [12, 23, 1111]);
-    assert.equal(convertDate('02.28.1832'), [2, 28, 1832]);
+    assert.deepEqual(convertDate('January 9, 2019'), [1, 9, 2019]);
+    assert.deepEqual(convertDate('Jan 9, 2019'), [1, 9, 2019]);
+    assert.deepEqual(convertDate('01/09/2019'), [1, 9, 2019]);
+    assert.deepEqual(convertDate('01-09-2019'), [1, 9, 2019]);
+    assert.deepEqual(convertDate('01.09.2019'), [1, 9, 2019]);
+    assert.deepEqual(convertDate('March 3, 1901'), [3, 3, 1901]);
+    assert.deepEqual(convertDate('Mar 3, 1901'), [3, 3, 1901]);
+    assert.deepEqual(convertDate('03/03/1901'), [3, 3, 1901]);
+    assert.deepEqual(convertDate('03-03-1901'), [3, 3, 1901]);
+    assert.deepEqual(convertDate('03.03.1901'), [3, 3, 1901]);
+    assert.deepEqual(convertDate('August 8, 1666'), [8, 8, 1666]);
+    assert.deepEqual(convertDate('Nov 13, 1533'), [11, 13, 1533]);
+    assert.deepEqual(convertDate('04/15/1789'), [4, 15, 1789]);
+    assert.deepEqual(convertDate('12-23-1111'), [12, 23, 1111]);
+    assert.deepEqual(convertDate('02.28.1832'), [2, 28, 1832]);
   });
 
   it('palindromicDate', () => {
@@ -199,6 +199,6 @@ describe('04-dates.test', () => {
       ['2/29/1600', 60], ['3/31/1999', 90], ['5/3/0002', 123],
       ['9/11/2001', 254], ['7/1/9996', 183], ['11/3/2020', 308]
     ];
-    for (const [ac, ex] of testDates) assert.equal(dayOfYear(ac), ex);
+    for (const [ac, ex] of testDates) assert.deepEqual(dayOfYear(ac), ex);
   });
 });
