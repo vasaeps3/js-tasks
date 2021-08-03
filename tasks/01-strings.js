@@ -13,7 +13,7 @@
 //  If you get a number with .0 on the end, return the integer value (e.g. return "4" rather than "4.0").
 //  If the number is 0, 0.0, 000, 00.00, etc... return "0".
 function removeLeadingTrailing(n) {
-  throw new Error('Not implemented');
+  return parseFloat(n);
 }
 
 // Create a function that will remove the letters "a", "b" and "c" from the given string and return the modified version. If the given string does not contain "a", "b", or "c", return null.
@@ -26,7 +26,10 @@ function removeLeadingTrailing(n) {
 // Notes
 //  If the given string does not contain "a", "b", or "c", return null.
 function removeABC(str) {
-  throw new Error('Not implemented');
+  const newStr = str.split('').reduce((acum, elem) => {
+    return ['a', 'b', 'c'].includes(elem) ? acum : acum + elem;
+  }, '');
+  return (str.length === newStr.length)? null : newStr;
 }
 
 // Given a string of numbers separated by a comma and space, return the product of the numbers.
@@ -40,7 +43,11 @@ function removeABC(str) {
 // Notes
 //  Bonus: Try to complete this challenge in one line!
 function multiplyNums(nums) {
-  throw new Error('Not implemented');
+  const arr =  nums.split(',');
+  return arr.reduce((acum, elem, index) =>{
+    if(index === 0) return +acum + +elem;
+    return acum*elem;
+  }, 0);
 }
 
 // Create a function to determine if the sum of all the individual even digits are greater than the sum of all the indiviudal odd digits in a string of numbers.
@@ -56,7 +63,18 @@ function multiplyNums(nums) {
 // Notes
 //  The input will be a string of numbers.
 function evenOrOdd(str) {
-  throw new Error('Not implemented');
+  const sums = str.split('').reduce((acum, elem) =>{
+    if(elem%2=== 0) return [acum[0] + +elem, acum[1]];    
+    if(elem%2!== 0) return [acum[0], acum[1] + +elem]; 
+  }, [0, 0]);  
+  switch(true){
+  case sums[0]>sums[1] :
+    return 'Even is greater than Odd';
+  case sums[0]<sums[1] :
+    return  'Odd is greater than Even';
+  default :
+    return 'Even and Odd are the same' ;
+  }
 }
 
 // Write a function that takes an integer i and returns an integer with the integer backwards followed by the original integer.
@@ -73,7 +91,7 @@ function evenOrOdd(str) {
 // Notes
 // i is a non-negative integer.
 function reverseAndNot(i) {
-  throw new Error('Not implemented');
+  return `${i}`.split('').reverse().join('')+i ;
 }
 
 // Create a function that takes a string, checks if it has the same number of x's and o's and returns either true or false.
@@ -95,7 +113,12 @@ function reverseAndNot(i) {
 //  Remember to return true if there aren't any x's or o's.
 //  Must be case insensitive.
 function XO(str) {
-  throw new Error('Not implemented');
+  let sums = 0;
+  str.split('').forEach(elem =>{
+    if(elem.toLowerCase() === 'o') sums++ ;
+    if(elem.toLowerCase() ==='x') sums--;
+  });
+  return !sums;
 }
 
 // Create a function that takes a string as an argument and converts the first character of each word to uppercase. Return the newly formatted string.
@@ -110,7 +133,9 @@ function XO(str) {
 //  You can expect a valid string for each test case.
 //  Some words may contain more than one uppercase letter (see example #4).
 function makeTitle(str) {
-  throw new Error('Not implemented');
+  return str.split(' ').reduce((acum, elem, index) =>{
+    return `${acum} ${elem[0].toUpperCase()+elem.slice(1)}`.trim();  
+  }, '');
 }
 
 // Double Letters
@@ -122,7 +147,11 @@ function makeTitle(str) {
 //  doubleLetters("orange") ➞ false
 //  doubleLetters("munchkin") ➞ false
 function doubleLetters(word) {
-  throw new Error('Not implemented');
+  const str = word.split('');
+  for(let i=0 ; i< str.length ; i++){
+    if(str[i] === str[i+1]) return true;
+  }
+  return false;
 }
 
 // Given two strings comprised of + and -, return a new string which shows how the two strings interact in the following way:
@@ -137,7 +166,10 @@ function doubleLetters(word) {
 // Notes
 // The two strings will be the same length.
 function neutralise(s1, s2) {
-  throw new Error('Not implemented');
+  const sums = s1.split('').reduce((acum, elem, index)=>{
+    return   (s1[index] === s2[index]) ? acum+elem : acum+'0';
+  }, '');
+  return sums;
 }
 
 // Create a function that takes a string str and modifies the given string as per the below examples:
@@ -147,7 +179,10 @@ function neutralise(s1, s2) {
 //  mumbling("maTT") ➞ "M-Aa-Ttt-Tttt"
 //  mumbling("EdaBit") ➞ "E-Dd-Aaa-Bbbb-Iiiii-Tttttt"
 function mumbling(str) {
-  throw new Error('Not implemented');
+  return str.split('').reduce((acum, elem, index) =>{
+    // eslint-disable-next-line max-len
+    return acum + elem[0].toUpperCase() + elem.toLowerCase().repeat(index+1).slice(1)+'-';
+  }, '').slice(0, -1);
 }
 
 module.exports = {
